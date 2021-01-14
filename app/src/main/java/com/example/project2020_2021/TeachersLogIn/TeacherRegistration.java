@@ -46,7 +46,6 @@ public class TeacherRegistration extends AppCompatActivity {
     TextInputLayout username, password;
     float v=0;
     ImageView crossopt;
-    final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference("Users");
     FirebaseAuth mAuth;
@@ -146,6 +145,7 @@ public class TeacherRegistration extends AppCompatActivity {
                                 {
                                     if (mAuth.getCurrentUser().isEmailVerified())
                                     {
+                                        String uid = mAuth.getCurrentUser().getUid();
                                         databaseReference.child("Teachers").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {

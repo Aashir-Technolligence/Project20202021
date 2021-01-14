@@ -47,7 +47,6 @@ public class InstituteRegistration extends AppCompatActivity {
     float v=0;
     ImageView crossopt;
     RelativeLayout progressbar;
-    final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference("Users");
     FirebaseAuth mAuth;
@@ -163,6 +162,7 @@ public class InstituteRegistration extends AppCompatActivity {
                                 {
                                     if (mAuth.getCurrentUser().isEmailVerified())
                                     {
+                                        String uid = mAuth.getCurrentUser().getUid();
                                         databaseReference.child("Institutes").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
