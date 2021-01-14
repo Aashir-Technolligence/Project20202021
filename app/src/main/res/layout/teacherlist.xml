@@ -44,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:id="@+id/txtStuName"
+                    android:id="@+id/txtTecName"
                     android:layout_weight="1"
                     android:textSize="25dp"
                     android:textColor="@color/black"/>
@@ -58,7 +58,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gender"
+                    android:text="Phone No"
                     android:layout_weight="1"
                     android:textSize="25dp"
                     android:textColor="@color/black"/>
@@ -67,7 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:id="@+id/txtStuGender"
+                    android:id="@+id/txtTecPhone"
                     android:layout_weight="1"
                     android:textSize="25dp"
                     android:textColor="@color/black"/>
@@ -81,7 +81,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Address"
+                    android:text="Email"
                     android:layout_weight="1"
                     android:textSize="25dp"
                     android:textColor="@color/black"/>
@@ -90,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:id="@+id/txtStuAddress"
+                    android:id="@+id/txtTecAddress"
                     android:layout_weight="1"
                     android:textSize="25dp"
                     android:textColor="@color/black"/>
@@ -104,7 +104,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Type"
+                    android:text="City"
                     android:layout_weight="1"
                     android:textSize="25dp"
                     android:textColor="@color/black"/>
@@ -113,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:id="@+id/txtStuType"
+                    android:id="@+id/txtTecCity"
                     android:layout_weight="1"
                     android:textSize="25dp"
                     android:textColor="@color/black"/>
@@ -127,7 +127,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Phone"
+                    android:text="Country"
                     android:layout_weight="1"
                     android:textSize="25dp"
                     android:textColor="@color/black"/>
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:id="@+id/txtStuPhone"
+                    android:id="@+id/txtTecCountry"
                     android:layout_weight="1"
                     android:textSize="25dp"
                     android:textColor="@color/black"/>
