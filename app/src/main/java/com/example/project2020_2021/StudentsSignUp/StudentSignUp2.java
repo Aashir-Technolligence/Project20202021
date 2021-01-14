@@ -36,8 +36,18 @@ public class StudentSignUp2 extends AppCompatActivity {
         subtext = (TextView) findViewById(R.id.register_teacher_text);
         tloginbtn = (TextView)  findViewById(R.id.student_loginbtn);
         teanext3 = (Button) findViewById(R.id.register_student_next_btn);
-
-
+//
+//        //passing data
+//        intent.putExtra("stuname",stunameS);
+//        intent.putExtra("stutype",stutypeS);
+//        intent.putExtra("stuemail",stuemailS);
+//        intent.putExtra("stupass",stupassS);
+        //getting dat
+        Intent intent = getIntent();
+        String nameS = intent.getStringExtra("stuname");
+        String emailS = intent.getStringExtra("stuemail");
+        String passS = intent.getStringExtra("stupass");
+        String typeS = intent.getStringExtra("stutype");
         tloginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,12 +86,6 @@ public class StudentSignUp2 extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), StudentSignUp3.class);
 
-                //getting all values passed from previous screen
-                String _stuname = getIntent().getStringExtra("stuname");
-                String _stutype = getIntent().getStringExtra("stutype");
-                String _stuemail = getIntent().getStringExtra("stuemail");
-                String _stupass = getIntent().getStringExtra("stupass");
-
 
                 //getting fields data
                 String stucountryS = stucountry.getSelectedCountryName().toString().trim();
@@ -97,10 +101,10 @@ public class StudentSignUp2 extends AppCompatActivity {
                 String stuphonefullS = "+" + stuphonecode.getFullNumber() + stuphoneS;
 
                 //passing data
-                intent.putExtra("stuname",_stuname);
-                intent.putExtra("stutype",_stutype);
-                intent.putExtra("stuemail",_stuemail);
-                intent.putExtra("stupass",_stupass);
+                intent.putExtra("stuname",nameS);
+                intent.putExtra("stutype",typeS);
+                intent.putExtra("stuemail",emailS);
+                intent.putExtra("stupass",passS);
                 intent.putExtra("stucountry",stucountryS);
                 intent.putExtra("stucity",stucityS);
                 intent.putExtra("stuaddress",stuaddressS);

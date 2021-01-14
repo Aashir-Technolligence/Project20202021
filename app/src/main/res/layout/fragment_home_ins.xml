@@ -58,7 +58,11 @@
             android:layout_marginRight="10dp"/>
 
     </RelativeLayout>
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/insRecycler"
+            android:layout_marginTop="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
     </RelativeLayout>
 
 </ScrollView>

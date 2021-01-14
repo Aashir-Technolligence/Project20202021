@@ -48,19 +48,7 @@ public class VerifyOPT3 extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         crossopt =(ImageView)findViewById(R.id.crossopt);
-
-        crossopt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(VerifyOPT3.this, StudentSignUp.class);
-                startActivity(intent);
-            }
-        });
-
-        //Hooks
-        stuPinfromUser = findViewById(R.id.stu_pin_view);
-
+        Intent intent = getIntent();
         //Getting All Field's data
         stuname = getIntent().getStringExtra("stuname");
         stutype = getIntent().getStringExtra("stutype");
@@ -74,6 +62,20 @@ public class VerifyOPT3 extends AppCompatActivity {
         stussub = getIntent().getStringExtra("stussub");
         stugender = getIntent().getStringExtra("stugender");
         studate = getIntent().getStringExtra("studate");
+
+        crossopt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(VerifyOPT3.this, StudentSignUp.class);
+                startActivity(intent);
+            }
+        });
+
+        //Hooks
+        stuPinfromUser = findViewById(R.id.stu_pin_view);
+
+
 
 
         //Verification of Phone Number
