@@ -12,9 +12,10 @@ public class StudentAttr {
     String stuphone;
     String stussub;
     String stuyeachertype;
+    String imgurl;
     String stutype;
 
-    public StudentAttr(String stuaddress, String stucity, String stucountry, String stuemail, String studate, String stugender, String stuname, String stupass, String stuphone, String stussub, String stuyeachertype, String stutype) {
+    public StudentAttr(String stuaddress, String stucity, String stucountry, String stuemail, String studate, String stugender, String stuname, String stupass, String stuphone, String stussub, String stuyeachertype, String imgurl, String stutype) {
         this.stuaddress = stuaddress;
         this.stucity = stucity;
         this.stucountry = stucountry;
@@ -26,6 +27,7 @@ public class StudentAttr {
         this.stuphone = stuphone;
         this.stussub = stussub;
         this.stuyeachertype = stuyeachertype;
+        this.imgurl = imgurl;
         this.stutype = stutype;
     }
 
@@ -126,5 +128,13 @@ public class StudentAttr {
 
     public void setStutype(String stutype) {
         this.stutype = stutype;
+    }
+
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
     }
 }

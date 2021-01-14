@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project2020_2021.Attribute.StudentAttr;
 import com.example.project2020_2021.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -34,10 +35,11 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.name.setText(studentAttrs.get(position).getStuname());
-        holder.gender.setText(studentAttrs.get(position).getStugender());
-        holder.phone.setText(studentAttrs.get(position).getStuphone());
-        holder.address.setText(studentAttrs.get(position).getStuaddress());
         holder.type.setText(studentAttrs.get(position).getStutype());
+        Picasso.get().load(studentAttrs.get(position).getImgurl()).into(holder.stuImage);
+      //  holder.phone.setText(studentAttrs.get(position).getStuphone());
+      //  holder.address.setText(studentAttrs.get(position).getStuaddress());
+       // holder.type.setText(studentAttrs.get(position).getStutype());
 
 
     }
@@ -49,14 +51,16 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView name, phone, gender,address,type;
+        ImageView stuImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.txtStuName);
-            gender = (TextView) itemView.findViewById(R.id.txtStuGender);
-            phone = (TextView) itemView.findViewById(R.id.txtStuPhone);
-            address = (TextView) itemView.findViewById(R.id.txtStuAddress);
+           // gender = (TextView) itemView.findViewById(R.id.txtStuGender);
+          //  phone = (TextView) itemView.findViewById(R.id.txtStuPhone);
+          //  address = (TextView) itemView.findViewById(R.id.txtStuAddress);
             type = (TextView) itemView.findViewById(R.id.txtStuType);
+            stuImage = (ImageView) itemView.findViewById(R.id.txtStuimage);
 
         }
     }
