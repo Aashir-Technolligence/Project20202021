@@ -101,9 +101,11 @@ public class HomeSignUp extends AppCompatActivity {
 
                 if (!validateHomeName() | !validateHomeEmail() | !validateHomePassword() | !validateHomeConPassword()){
                     return;
+                } else {
+                    storeNewUsersData();
                 }
 
-                storeNewUsersData();
+
 
 
                 /*Intent intent = new Intent(getApplicationContext(), HomePage.class);

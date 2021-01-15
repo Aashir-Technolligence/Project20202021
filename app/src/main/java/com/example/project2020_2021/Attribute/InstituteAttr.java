@@ -3,12 +3,29 @@ package com.example.project2020_2021.Attribute;
 public class InstituteAttr {
     String address;
     String city;
-    String inscountry;
+    String country;
     String insemail;
-    String insname;
     String inspass;
+    String insname;
     String phoneno;
     String instype;
+    String insimgurl;
+
+
+    public InstituteAttr(String address, String city, String country, String insemail, String inspass, String insname, String phoneno, String instype, String insimgurl) {
+        this.address = address;
+        this.city = city;
+        this.country = country;
+        this.insemail = insemail;
+        this.inspass = inspass;
+        this.insname = insname;
+        this.phoneno = phoneno;
+        this.instype = instype;
+        this.insimgurl = insimgurl;
+    }
+
+    public InstituteAttr() {
+    }
 
     public String getAddress() {
         return address;
@@ -26,12 +43,12 @@ public class InstituteAttr {
         this.city = city;
     }
 
-    public String getInscountry() {
-        return inscountry;
+    public String getCountry() {
+        return country;
     }
 
-    public void setInscountry(String inscountry) {
-        this.inscountry = inscountry;
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public String getInsemail() {
@@ -42,20 +59,20 @@ public class InstituteAttr {
         this.insemail = insemail;
     }
 
-    public String getInsname() {
-        return insname;
-    }
-
-    public void setInsname(String insname) {
-        this.insname = insname;
-    }
-
     public String getInspass() {
         return inspass;
     }
 
     public void setInspass(String inspass) {
         this.inspass = inspass;
+    }
+
+    public String getInsname() {
+        return insname;
+    }
+
+    public void setInsname(String insname) {
+        this.insname = insname;
     }
 
     public String getPhoneno() {
@@ -74,17 +91,11 @@ public class InstituteAttr {
         this.instype = instype;
     }
 
-    public InstituteAttr(String address, String city, String inscountry, String insemail, String insname, String inspass, String phoneno, String instype) {
-        this.address = address;
-        this.city = city;
-        this.inscountry = inscountry;
-        this.insemail = insemail;
-        this.insname = insname;
-        this.inspass = inspass;
-        this.phoneno = phoneno;
-        this.instype = instype;
+    public String getInsimgurl() {
+        return insimgurl;
     }
 
-    public InstituteAttr() {
+    public void setInsimgurl(String insimgurl) {
+        this.insimgurl = insimgurl;
     }
 }

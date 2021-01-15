@@ -6,15 +6,37 @@ public class TeacherAttr {
     String teacountry;
     String teaemail;
     String teadate;
-    String teaexp;
-    String teafee;
     String teagender;
     String teaname;
     String teapass;
     String teaphone;
     String teaqua;
+    String teassub;
     String teatype;
+    String teafee;
+    String teaimgurl;
     String teawteach;
+
+    public TeacherAttr(String teaaddress, String teacity, String teacountry, String teaemail, String teadate, String teagender, String teaname, String teapass, String teaphone, String teaqua, String teassub, String teatype, String teafee, String teaimgurl, String teawteach) {
+        this.teaaddress = teaaddress;
+        this.teacity = teacity;
+        this.teacountry = teacountry;
+        this.teaemail = teaemail;
+        this.teadate = teadate;
+        this.teagender = teagender;
+        this.teaname = teaname;
+        this.teapass = teapass;
+        this.teaphone = teaphone;
+        this.teaqua = teaqua;
+        this.teassub = teassub;
+        this.teatype = teatype;
+        this.teafee = teafee;
+        this.teaimgurl = teaimgurl;
+        this.teawteach = teawteach;
+    }
+
+    public TeacherAttr() {
+    }
 
     public String getTeaaddress() {
         return teaaddress;
@@ -54,22 +76,6 @@ public class TeacherAttr {
 
     public void setTeadate(String teadate) {
         this.teadate = teadate;
-    }
-
-    public String getTeaexp() {
-        return teaexp;
-    }
-
-    public void setTeaexp(String teaexp) {
-        this.teaexp = teaexp;
-    }
-
-    public String getTeafee() {
-        return teafee;
-    }
-
-    public void setTeafee(String teafee) {
-        this.teafee = teafee;
     }
 
     public String getTeagender() {
@@ -112,6 +118,14 @@ public class TeacherAttr {
         this.teaqua = teaqua;
     }
 
+    public String getTeassub() {
+        return teassub;
+    }
+
+    public void setTeassub(String teassub) {
+        this.teassub = teassub;
+    }
+
     public String getTeatype() {
         return teatype;
     }
@@ -120,31 +134,27 @@ public class TeacherAttr {
         this.teatype = teatype;
     }
 
+    public String getTeafee() {
+        return teafee;
+    }
+
+    public void setTeafee(String teafee) {
+        this.teafee = teafee;
+    }
+
+    public String getTeaimgurl() {
+        return teaimgurl;
+    }
+
+    public void setTeaimgurl(String teaimgurl) {
+        this.teaimgurl = teaimgurl;
+    }
+
     public String getTeawteach() {
         return teawteach;
     }
 
     public void setTeawteach(String teawteach) {
         this.teawteach = teawteach;
-    }
-
-    public TeacherAttr(String teaaddress, String teacity, String teacountry, String teaemail, String teadate, String teaexp, String teafee, String teagender, String teaname, String teapass, String teaphone, String teaqua, String teatype, String teawteach) {
-        this.teaaddress = teaaddress;
-        this.teacity = teacity;
-        this.teacountry = teacountry;
-        this.teaemail = teaemail;
-        this.teadate = teadate;
-        this.teaexp = teaexp;
-        this.teafee = teafee;
-        this.teagender = teagender;
-        this.teaname = teaname;
-        this.teapass = teapass;
-        this.teaphone = teaphone;
-        this.teaqua = teaqua;
-        this.teatype = teatype;
-        this.teawteach = teawteach;
-    }
-
-    public TeacherAttr() {
     }
 }

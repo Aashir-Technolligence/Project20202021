@@ -137,7 +137,11 @@ public class VerifyOPT extends AppCompatActivity {
         signInWithPhoneAuthCredential(credential);
 
     }
-
+   // database=FirebaseDatabase.getInstance();
+  //  ref = database.getReference("Employee_Profile");
+ //   storage=FirebaseStorage.getInstance();
+  //  storageReference=storage.getReference();
+   // mAuth = FirebaseAuth.getInstance(  );
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
 
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -174,10 +178,10 @@ public class VerifyOPT extends AppCompatActivity {
 
        // progressbar.setVisibility(View.VISIBLE);
 
-        String email= "chareeb24@gmail.com";
-        String pass ="aaa123";
+       // String email= "chareeb24@gmail.com";
+      //  String pass ="aaa123";
 
-        mAuth.createUserWithEmailAndPassword(email,pass)
+        mAuth.createUserWithEmailAndPassword(insemail,inspass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

@@ -51,8 +51,26 @@ public class StudentSignUp3 extends AppCompatActivity {
         subtext = (TextView) findViewById(R.id.register_teacher_text);
         tloginbtn = (TextView)  findViewById(R.id.student_loginbtn);
         teanext3 = (Button) findViewById(R.id.register_student_next_btn);
-
-
+//
+//        intent.putExtra("stuname",nameS);
+//        intent.putExtra("stutype",typeS);
+//        intent.putExtra("stuemail",emailS);
+//        intent.putExtra("stupass",passS);
+//        intent.putExtra("stucountry",stucountryS);
+//        intent.putExtra("stucity",stucityS);
+//        intent.putExtra("stuaddress",stuaddressS);
+//        intent.putExtra("stuphoneno",stuphonefullS);
+//
+        Intent intent = getIntent();
+        //getting all values passed from previous screen
+        String _stuname = getIntent().getStringExtra("stuname");
+        String _stutype = getIntent().getStringExtra("stutype");
+        String _stuemail = getIntent().getStringExtra("stuemail");
+        String _stupass = getIntent().getStringExtra("stupass");
+        String _stucountry = getIntent().getStringExtra("stucountry");
+        String _stucity = getIntent().getStringExtra("stucity");
+        String _stuaddress = getIntent().getStringExtra("stuaddress");
+        String _stuphone = getIntent().getStringExtra("stuphoneno");
 
         tloginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,15 +112,7 @@ public class StudentSignUp3 extends AppCompatActivity {
 
 
 
-                //getting all values passed from previous screen
-                String _stuname = getIntent().getStringExtra("stuname");
-                String _stutype = getIntent().getStringExtra("stutype");
-                String _stuemail = getIntent().getStringExtra("stuemail");
-                String _stupass = getIntent().getStringExtra("stupass");
-                String _stucountry = getIntent().getStringExtra("stucountry");
-                String _stucity = getIntent().getStringExtra("stucity");
-                String _stuaddress = getIntent().getStringExtra("stuaddress");
-                String _stuphone = getIntent().getStringExtra("stuphoneno");
+
 
                 int day = studatePicker.getDayOfMonth();
                 int month = studatePicker.getMonth();
