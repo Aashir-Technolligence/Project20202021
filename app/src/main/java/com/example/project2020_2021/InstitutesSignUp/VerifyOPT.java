@@ -181,52 +181,52 @@ public class VerifyOPT extends AppCompatActivity {
        // String email= "chareeb24@gmail.com";
       //  String pass ="aaa123";
 
-        mAuth.createUserWithEmailAndPassword(insemail,inspass)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if(task.isSuccessful())
-                        {
-                            UserHelperClass addNewUser = new UserHelperClass(insname, instype, insemail, inspass, inscountry, city, address, phoneno);
-                            FirebaseDatabase.getInstance().getReference("Users").child("Institutes")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("InstituteDetails")
-                                    .setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-
-                                    if (task.isSuccessful())
-                                    {
-                                        mAuth.getCurrentUser().sendEmailVerification()
-                                                .addOnCompleteListener(new OnCompleteListener<Void>()
-                                                {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful())
-                                                        {
-                                                            Toast.makeText(VerifyOPT.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
-                                                        }
-                                                        else
-                                                        {
-                                                            Toast.makeText(VerifyOPT.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
-                                                        }
-                                                    }
-                                                });
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(VerifyOPT.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            });
-                        }
-                        else
-                        {
-                            Toast.makeText(VerifyOPT.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-                });
+//        mAuth.createUserWithEmailAndPassword(insemail,inspass)
+//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                        if(task.isSuccessful())
+//                        {
+//                            UserHelperClass addNewUser = new UserHelperClass(insname, instype, insemail, inspass, inscountry, city, address, phoneno);
+//                            FirebaseDatabase.getInstance().getReference("Users").child("Institutes")
+//                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("InstituteDetails")
+//                                    .setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//
+//                                    if (task.isSuccessful())
+//                                    {
+//                                        mAuth.getCurrentUser().sendEmailVerification()
+//                                                .addOnCompleteListener(new OnCompleteListener<Void>()
+//                                                {
+//                                                    @Override
+//                                                    public void onComplete(@NonNull Task<Void> task) {
+//                                                        if (task.isSuccessful())
+//                                                        {
+//                                                            Toast.makeText(VerifyOPT.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
+//                                                        }
+//                                                        else
+//                                                        {
+//                                                            Toast.makeText(VerifyOPT.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                                                        }
+//                                                    }
+//                                                });
+//                                    }
+//                                    else
+//                                    {
+//                                        Toast.makeText(VerifyOPT.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                                    }
+//                                }
+//                            });
+//                        }
+//                        else
+//                        {
+//                            Toast.makeText(VerifyOPT.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                        }
+//
+//                    }
+//                });
     }
 
 }

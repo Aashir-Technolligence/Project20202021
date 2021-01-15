@@ -11,10 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.project2020_2021.Adapter.StudentListAdapter;
 import com.example.project2020_2021.Adapter.TeacherListAdapter;
-import com.example.project2020_2021.Attribute.StudentAttr;
-import com.example.project2020_2021.Attribute.TeacherAttr;
+import com.example.project2020_2021.Databases.TeaUserHelperClass;
 import com.example.project2020_2021.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,14 +27,14 @@ public class HomeTeaFragment extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference reference;
-    ArrayList<TeacherAttr> teacherAttrs;
+    ArrayList<TeaUserHelperClass> teacherAttrs;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_home_tea, container, false);
 
-        listView = (RecyclerView) v.findViewById(R.id.recycler);
+        listView = (RecyclerView) v.findViewById(R.id.tecRecycler);
         teacherAttrs = new ArrayList<>();//constructor
         listView.setLayoutManager(new LinearLayoutManager(getContext()));
         database = FirebaseDatabase.getInstance();  //database connectivity
@@ -51,7 +49,7 @@ public class HomeTeaFragment extends Fragment {
                             teacherAttrs.clear();
                             //profiledata.clear();
                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                TeacherAttr p = dataSnapshot1.getValue(TeacherAttr.class);
+                                TeaUserHelperClass p = dataSnapshot1.getValue(TeaUserHelperClass.class);
                                 teacherAttrs.add(p);
                             }
 //                            Collections.reverse(studentAttrs);

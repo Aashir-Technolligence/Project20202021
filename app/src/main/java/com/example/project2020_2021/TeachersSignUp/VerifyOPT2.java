@@ -187,53 +187,53 @@ public class VerifyOPT2 extends AppCompatActivity {
         String email= "usraabdulrasheed122@gmail.com";
         String pass ="bbb123";
 
-        mAuth.createUserWithEmailAndPassword(email,pass)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if(task.isSuccessful())
-                        {
-                            TeaUserHelperClass addNewUser = new TeaUserHelperClass(teaname, teatype, teaemail, teapass, teacountry, teacity, teaaddress,
-                                                                                            teaphone, teaqua, teaexp, teawteach, teafee, teagender, teadate);
-                            FirebaseDatabase.getInstance().getReference("Users").child("Teachers")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-
-                                    if (task.isSuccessful())
-                                    {
-                                        mAuth.getCurrentUser().sendEmailVerification()
-                                                .addOnCompleteListener(new OnCompleteListener<Void>()
-                                                {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful())
-                                                        {
-                                                            Toast.makeText(VerifyOPT2.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
-                                                        }
-                                                        else
-                                                        {
-                                                            Toast.makeText(VerifyOPT2.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
-                                                        }
-                                                    }
-                                                });
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(VerifyOPT2.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            });
-                        }
-                        else
-                        {
-                            Toast.makeText(VerifyOPT2.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-                });
+//        mAuth.createUserWithEmailAndPassword(email,pass)
+//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                        if(task.isSuccessful())
+//                        {
+//                            TeaUserHelperClass addNewUser = new TeaUserHelperClass(teaname, teatype, teaemail, teapass, teacountry, teacity, teaaddress,
+//                                                                                            teaphone, teaqua, teaexp, teawteach, teafee, teagender, teadate);
+//                            FirebaseDatabase.getInstance().getReference("Users").child("Teachers")
+//                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                    .setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//
+//                                    if (task.isSuccessful())
+//                                    {
+//                                        mAuth.getCurrentUser().sendEmailVerification()
+//                                                .addOnCompleteListener(new OnCompleteListener<Void>()
+//                                                {
+//                                                    @Override
+//                                                    public void onComplete(@NonNull Task<Void> task) {
+//                                                        if (task.isSuccessful())
+//                                                        {
+//                                                            Toast.makeText(VerifyOPT2.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
+//                                                        }
+//                                                        else
+//                                                        {
+//                                                            Toast.makeText(VerifyOPT2.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                                                        }
+//                                                    }
+//                                                });
+//                                    }
+//                                    else
+//                                    {
+//                                        Toast.makeText(VerifyOPT2.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                                    }
+//                                }
+//                            });
+//                        }
+//                        else
+//                        {
+//                            Toast.makeText(VerifyOPT2.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                        }
+//
+//                    }
+//                });
     }
 
 

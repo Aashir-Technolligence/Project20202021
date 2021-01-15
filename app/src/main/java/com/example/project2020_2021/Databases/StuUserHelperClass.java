@@ -2,12 +2,20 @@ package com.example.project2020_2021.Databases;
 
 public class StuUserHelperClass {
 
-    String stuname, stutype, stuemail, stupass, stucountry, stucity, stuaddress, stuphone, stuteachertype, stussub, stugender, studate;
+    String stuid , stuname, stutype, stuemail, stupass, stucountry, stucity, stuaddress, stuphone, stuteachertype, stussub, stugender, studate;
 
     public StuUserHelperClass(){}
 
-    public StuUserHelperClass( String stuname, String stutype, String stuemail, String stupass, String stucountry, String stucity,
-                               String stuaddress, String stuphone, String stuteachertype, String stussub, String stugender, String studate) {
+    public String getStuid() {
+        return stuid;
+    }
+
+    public void setStuid(String stuid) {
+        this.stuid = stuid;
+    }
+
+    public StuUserHelperClass(String stuid, String stuname, String stutype, String stuemail, String stupass, String stucountry, String stucity, String stuaddress, String stuphone, String stuteachertype, String stussub, String stugender, String studate) {
+        this.stuid = stuid;
         this.stuname = stuname;
         this.stutype = stutype;
         this.stuemail = stuemail;

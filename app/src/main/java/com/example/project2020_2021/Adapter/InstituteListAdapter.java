@@ -9,17 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project2020_2021.Attribute.InstituteAttr;
-import com.example.project2020_2021.Attribute.StudentAttr;
+import com.example.project2020_2021.Databases.UserHelperClass;
 import com.example.project2020_2021.R;
 
 import java.util.ArrayList;
 
 public class InstituteListAdapter extends RecyclerView.Adapter<InstituteListAdapter.ViewHolder> {
-    ArrayList<InstituteAttr> instituteAttrs;
+    ArrayList<UserHelperClass> instituteAttrs;
     private Context context;
 
-    public InstituteListAdapter(ArrayList<InstituteAttr> instituteAttrs, Context context) {
+    public InstituteListAdapter(ArrayList<UserHelperClass> instituteAttrs, Context context) {
         this.context = context;
         this.instituteAttrs = instituteAttrs;
     }
@@ -33,8 +32,8 @@ public class InstituteListAdapter extends RecyclerView.Adapter<InstituteListAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        holder.name.setText(instituteAttrs.get(position).getInsname());
-        holder.type.setText(instituteAttrs.get(position).getInstype());
+//        holder.name.setText(instituteAttrs.get(position).getInsname());
+//        holder.city.setText(instituteAttrs.get(position).getCity());
 //        holder.phone.setText(instituteAttrs.get(position).getPhoneno());
 //        holder.address.setText(instituteAttrs.get(position).getAddress());
 //        holder.country.setText(instituteAttrs.get(position).getInscountry());

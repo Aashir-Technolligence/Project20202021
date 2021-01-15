@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project20202021">
-        <activity android:name=".MainHomeActivity.Chats"></activity>
+        <activity android:name=".TeacherDetail"></activity>
+        <activity android:name=".StudentDetail" />
+        <activity android:name=".MainHomeActivity.Chats" />
         <activity android:name=".MainHomeActivity.Notification_Settings" />
         <activity android:name=".InstitutesVacancies.AddVacancy" />
         <activity android:name=".StudentsProfile.StudentProfile" />

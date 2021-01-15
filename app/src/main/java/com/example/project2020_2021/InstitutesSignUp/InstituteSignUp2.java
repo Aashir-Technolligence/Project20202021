@@ -145,7 +145,7 @@ public class InstituteSignUp2 extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if (task.isSuccessful()) {
-                                    UserHelperClass addNewUser = new UserHelperClass(_insname, _instype, _insemail, _inspass, inscountryS, inscityS, insaddressS, phoneno);
+                                    UserHelperClass addNewUser = new UserHelperClass(FirebaseAuth.getInstance().getCurrentUser().getUid() , _insname, _instype, _insemail, _inspass, inscountryS, inscityS, insaddressS, phoneno);
                                     FirebaseDatabase.getInstance().getReference("Users").child("Institutes")
                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("InstituteDetails")
                                             .setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -185,52 +185,52 @@ public class VerifyOPT3 extends AppCompatActivity {
         String email= "yusraabdulrasheed955@gmail.com";
         String pass ="ccc123";
 
-        mAuth.createUserWithEmailAndPassword(email,pass)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if(task.isSuccessful())
-                        {
-                            StuUserHelperClass addNewUser = new StuUserHelperClass(stuname, stutype, stuemail, stupass, stucountry, stucity,
-                                    stuaddress, stuphone, stuteachertype, stussub, stugender, studate);
-                            FirebaseDatabase.getInstance().getReference("Users").child("Students")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-
-                                    if (task.isSuccessful())
-                                    {
-                                        mAuth.getCurrentUser().sendEmailVerification()
-                                                .addOnCompleteListener(new OnCompleteListener<Void>()
-                                                {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful())
-                                                        {
-                                                            Toast.makeText(VerifyOPT3.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
-                                                        }
-                                                        else
-                                                        {
-                                                            Toast.makeText(VerifyOPT3.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
-                                                        }
-                                                    }
-                                                });
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(VerifyOPT3.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            });
-                        }
-                        else
-                        {
-                            Toast.makeText(VerifyOPT3.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
-                        }
-
-                    }
-                });
+//        mAuth.createUserWithEmailAndPassword(email,pass)
+//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                        if(task.isSuccessful())
+//                        {
+//                            StuUserHelperClass addNewUser = new StuUserHelperClass(stuname, stutype, stuemail, stupass, stucountry, stucity,
+//                                    stuaddress, stuphone, stuteachertype, stussub, stugender, studate);
+//                            FirebaseDatabase.getInstance().getReference("Users").child("Students")
+//                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                    .setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//
+//                                    if (task.isSuccessful())
+//                                    {
+//                                        mAuth.getCurrentUser().sendEmailVerification()
+//                                                .addOnCompleteListener(new OnCompleteListener<Void>()
+//                                                {
+//                                                    @Override
+//                                                    public void onComplete(@NonNull Task<Void> task) {
+//                                                        if (task.isSuccessful())
+//                                                        {
+//                                                            Toast.makeText(VerifyOPT3.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
+//                                                        }
+//                                                        else
+//                                                        {
+//                                                            Toast.makeText(VerifyOPT3.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                                                        }
+//                                                    }
+//                                                });
+//                                    }
+//                                    else
+//                                    {
+//                                        Toast.makeText(VerifyOPT3.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                                    }
+//                                }
+//                            });
+//                        }
+//                        else
+//                        {
+//                            Toast.makeText(VerifyOPT3.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                        }
+//
+//                    }
+//                });
     }
 }

@@ -1,6 +1,8 @@
 package com.example.project2020_2021.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +12,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.project2020_2021.Attribute.StudentAttr;
+import com.example.project2020_2021.Databases.StuUserHelperClass;
 import com.example.project2020_2021.R;
+import com.example.project2020_2021.StudentDetail;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.ViewHolder> {
-    ArrayList<StudentAttr> studentAttrs;
+    ArrayList<StuUserHelperClass> studentAttrs;
     private Context context;
 
-    public StudentListAdapter(ArrayList<StudentAttr> studentAttrs, Context context) {
+    public StudentListAdapter(ArrayList<StuUserHelperClass> studentAttrs, Context context) {
         this.context = context;
         this.studentAttrs = studentAttrs;
     }
@@ -36,11 +42,23 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.name.setText(studentAttrs.get(position).getStuname());
         holder.type.setText(studentAttrs.get(position).getStutype());
-        Picasso.get().load(studentAttrs.get(position).getImgurl()).into(holder.stuImage);
-      //  holder.phone.setText(studentAttrs.get(position).getStuphone());
-      //  holder.address.setText(studentAttrs.get(position).getStuaddress());
-       // holder.type.setText(studentAttrs.get(position).getStutype());
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference();
 
+        StorageReference profileRef = storageReference.child("Users/"+"Students/"+studentAttrs.get(position).getStuid()+"/profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(holder.stuImage);
+            }
+        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context , StudentDetail.class);
+                i.putExtra("id" , studentAttrs.get(position).getStuid());
+                context.startActivity(i);
+            }
+        });
 
     }
 
@@ -50,15 +68,12 @@ public class StudentListAdapter extends RecyclerView.Adapter<StudentListAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, phone, gender,address,type;
+        TextView name, type;
         ImageView stuImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.txtStuName);
-           // gender = (TextView) itemView.findViewById(R.id.txtStuGender);
-          //  phone = (TextView) itemView.findViewById(R.id.txtStuPhone);
-          //  address = (TextView) itemView.findViewById(R.id.txtStuAddress);
             type = (TextView) itemView.findViewById(R.id.txtStuType);
             stuImage = (ImageView) itemView.findViewById(R.id.txtStuimage);
 

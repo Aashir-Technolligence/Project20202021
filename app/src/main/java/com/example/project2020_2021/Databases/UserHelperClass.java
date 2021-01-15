@@ -2,11 +2,20 @@ package com.example.project2020_2021.Databases;
 
 public class UserHelperClass {
 
-    String insname, instype, insemail, inspass, inscountry, city, address, phoneno;
+    String insid, insname, instype, insemail, inspass, inscountry, city, address, phoneno;
 
    public UserHelperClass(){}
 
-    public UserHelperClass(String insname, String instype, String insemail, String inspass, String inscountry, String city, String address, String phoneno) {
+    public String getInsid() {
+        return insid;
+    }
+
+    public void setInsid(String insid) {
+        this.insid = insid;
+    }
+
+    public UserHelperClass(String insid, String insname, String instype, String insemail, String inspass, String inscountry, String city, String address, String phoneno) {
+        this.insid = insid;
         this.insname = insname;
         this.instype = instype;
         this.insemail = insemail;

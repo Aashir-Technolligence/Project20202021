@@ -160,7 +160,7 @@ public class StudentSignUp3 extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if (task.isSuccessful()) {
-                                    StuUserHelperClass addNewUser = new StuUserHelperClass(_stuname, _stutype, _stuemail, _stupass, _stucountry, _stucity,
+                                    StuUserHelperClass addNewUser = new StuUserHelperClass(FirebaseAuth.getInstance().getCurrentUser().getUid() ,_stuname, _stutype, _stuemail, _stupass, _stucountry, _stucity,
                                             _stuaddress, _stuphone, stuteatypeS, stussubS, stugender, studate);
                                     FirebaseDatabase.getInstance().getReference("Users").child("Students")
                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

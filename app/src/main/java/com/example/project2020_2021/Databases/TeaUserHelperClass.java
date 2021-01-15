@@ -2,12 +2,20 @@ package com.example.project2020_2021.Databases;
 
 public class TeaUserHelperClass {
 
-    String teaname, teatype, teaemail, teapass, teacountry, teacity, teaaddress, teaphone, teaqua, teaexp, teawteach, teafee, teagender, teadate;
+    String teaid , teaname, teatype, teaemail, teapass, teacountry, teacity, teaaddress, teaphone, teaqua, teaexp, teawteach, teafee, teagender, teadate;
 
     public TeaUserHelperClass(){}
 
-    public TeaUserHelperClass( String teaname, String teatype, String teaemail, String teapass, String teacountry, String teacity, String teaaddress, String teaphone, String teaqua,
-                               String teaexp, String teawteach, String teafee, String teagender, String teadate) {
+    public String getTeaid() {
+        return teaid;
+    }
+
+    public void setTeaid(String teaid) {
+        this.teaid = teaid;
+    }
+
+    public TeaUserHelperClass(String teaid, String teaname, String teatype, String teaemail, String teapass, String teacountry, String teacity, String teaaddress, String teaphone, String teaqua, String teaexp, String teawteach, String teafee, String teagender, String teadate) {
+        this.teaid = teaid;
         this.teaname = teaname;
         this.teatype = teatype;
         this.teaemail = teaemail;

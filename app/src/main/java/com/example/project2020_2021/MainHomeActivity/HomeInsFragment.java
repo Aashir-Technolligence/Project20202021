@@ -13,10 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.project2020_2021.Adapter.InstituteListAdapter;
-import com.example.project2020_2021.Adapter.StudentListAdapter;
-import com.example.project2020_2021.Attribute.InstituteAttr;
-import com.example.project2020_2021.Attribute.StudentAttr;
-import com.example.project2020_2021.Attribute.TeacherAttr;
+import com.example.project2020_2021.Databases.UserHelperClass;
 import com.example.project2020_2021.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,14 +28,14 @@ public class HomeInsFragment extends Fragment {
 
     FirebaseDatabase database;
     DatabaseReference reference;
-    ArrayList<InstituteAttr> instituteAttrs;
+    ArrayList<UserHelperClass> instituteAttrs;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home_ins, container, false);
-        listView = (RecyclerView) v.findViewById(R.id.recycler);
+        listView = (RecyclerView) v.findViewById(R.id.insRecycler);
         instituteAttrs = new ArrayList<>();//constructor
         listView.setLayoutManager(new LinearLayoutManager(getContext()));
         database = FirebaseDatabase.getInstance();  //database connectivity
@@ -55,12 +52,7 @@ public class HomeInsFragment extends Fragment {
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     try {
                                         instituteAttrs.clear();
-                                        //profiledata.clear();
-//                                        for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
-//                                            InstituteAttr p = dataSnapshot2.getValue(InstituteAttr.class);
-//                                            instituteAttrs.add(p);
-//                                        }
-                                        InstituteAttr p = snapshot.getValue(InstituteAttr.class);
+                                        UserHelperClass p = snapshot.getValue(UserHelperClass.class);
                                         instituteAttrs.add(p);
 //                            Collections.reverse(studentAttrs);
                                         listView.setAdapter(new InstituteListAdapter(instituteAttrs, getContext()));

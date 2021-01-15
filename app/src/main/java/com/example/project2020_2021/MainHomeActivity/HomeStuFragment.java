@@ -9,12 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.project2020_2021.Adapter.StudentListAdapter;
-import com.example.project2020_2021.Attribute.StudentAttr;
+import com.example.project2020_2021.Databases.StuUserHelperClass;
 import com.example.project2020_2021.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,15 +21,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class HomeStuFragment extends Fragment {
     RecyclerView listView;
 
     FirebaseDatabase database;
     DatabaseReference reference;
-    ArrayList<StudentAttr> studentAttrs;
+    ArrayList<StuUserHelperClass> studentAttrs;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,20 +45,20 @@ public class HomeStuFragment extends Fragment {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(getActivity()!=null){
                     if (dataSnapshot.exists()) {
-                        try{
+                        try {
                             studentAttrs.clear();
                             //profiledata.clear();
                             for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                                StudentAttr p = dataSnapshot1.getValue(StudentAttr.class);
+                                StuUserHelperClass p = dataSnapshot1.getValue(StuUserHelperClass.class);
                                 studentAttrs.add(p);
                             }
 //                            Collections.reverse(studentAttrs);
                             listView.setAdapter(new StudentListAdapter(studentAttrs, getContext()));
+                        } catch (Exception e) {
                         }
-                        catch (Exception e){}
                     } else {
                         Toast.makeText(getContext(), "No Record Found", Toast.LENGTH_LONG).show();
-                        }
+                    }
                 }
 
             }

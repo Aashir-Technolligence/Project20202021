@@ -129,7 +129,7 @@ public class TeacherSignUp4 extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
 
                                 if (task.isSuccessful()) {
-                                    TeaUserHelperClass addNewUser = new TeaUserHelperClass(_teaname, _teatype, _teaemail, _teapass, _teacountry, _teacity, _teaaddress,
+                                    TeaUserHelperClass addNewUser = new TeaUserHelperClass(FirebaseAuth.getInstance().getCurrentUser().getUid() , _teaname, _teatype, _teaemail, _teapass, _teacountry, _teacity, _teaaddress,
                                             _teaphone, _teaqua, _teaexp, _teawteach, _teafee, teagender, teadate);
                                     FirebaseDatabase.getInstance().getReference("Users").child("Teachers")
                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
