@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project2020_2021.Databases.FirbaseAuthenticationClass;
 import com.example.project2020_2021.InstitutesLogIn.InstituteRegistration;
 import com.example.project2020_2021.InstitutesProfile.InstituteProfile;
 import com.example.project2020_2021.IntroductoryAccount.AccountActivity;
@@ -37,6 +38,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import static android.provider.ContactsContract.Intents.Insert.EMAIL;
+import static android.provider.Telephony.Carriers.PASSWORD;
+
 public class StudentRegistration extends AppCompatActivity {
 
     TextView lregisstu;
@@ -45,22 +49,23 @@ public class StudentRegistration extends AppCompatActivity {
     TextInputLayout username, password;
     float v=0;
     ImageView crossopt;
-    final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = firebaseDatabase.getReference("Users");
-    FirebaseAuth mAuth;
+   // final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+   // FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+  //  DatabaseReference databaseReference = firebaseDatabase.getReference("Users");
+  //  FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_registration);
 
-        mAuth = FirebaseAuth.getInstance();
+    //    mAuth = FirebaseAuth.getInstance();
 
         forgotpass = (Button) findViewById(R.id.forgotpass);
         login = (Button) findViewById(R.id.login);
         newuser=(LinearLayout)findViewById(R.id.newuser);
         username=(TextInputLayout) findViewById(R.id.username);
+        final FirbaseAuthenticationClass firbaseAuthenticationClass=new FirbaseAuthenticationClass();
         password=(TextInputLayout) findViewById(R.id.password);
 
         username.setTranslationX(800);
@@ -134,48 +139,7 @@ public class StudentRegistration extends AppCompatActivity {
                     return;
                 }
 
-                mAuth.signInWithEmailAndPassword(username.getEditText().getText().toString().trim(),password.getEditText().getText().toString().trim())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                                if(task.isSuccessful())
-                                {
-                                    if (mAuth.getCurrentUser().isEmailVerified())
-                                    {
-                                        databaseReference.child("Students").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                try{
-                                                    if(snapshot.exists()){
-                                                        startActivity(new Intent(StudentRegistration.this, StudentProfile.class));
-                                                    }
-                                                    else
-                                                        Toast.makeText(StudentRegistration.this, "Students login only!", Toast.LENGTH_LONG).show();
-
-                                                }
-                                                catch (Exception e){}
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
-
-                                            }
-                                        });
-
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(StudentRegistration.this, "Please Verify your Email Address!", Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                                else
-                                {
-                                    Toast.makeText(StudentRegistration.this,task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                }
-
-                            }
-                        });
+                firbaseAuthenticationClass.LoginUser(EMAIL,PASSWORD, StudentRegistration.this);
             }
 
 

@@ -3,6 +3,7 @@ package com.example.project2020_2021.StudentsSignUp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Pair;
@@ -17,6 +18,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project2020_2021.Databases.FirbaseAuthenticationClass;
 import com.example.project2020_2021.R;
 import com.example.project2020_2021.StudentsLogIn.StudentRegistration;
 import com.google.android.material.textfield.TextInputLayout;
@@ -31,7 +33,7 @@ public class StudentSignUp3 extends AppCompatActivity {
     RadioGroup stuGender;
     RadioButton selectedGender;
     DatePicker studatePicker;
-
+    //ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class StudentSignUp3 extends AppCompatActivity {
         //To set Default Values
         autoCompleteTextView.setText("Select Teacher Type");
         autoCompleteTextView.setAdapter(arrayAdapter);
+
 
         backbtn = (ImageView) findViewById(R.id.backbtn);
         ttext = (TextView) findViewById(R.id.register_teacher_title_text);
