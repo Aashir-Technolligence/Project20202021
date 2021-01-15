@@ -1,11 +1,17 @@
 package com.example.project2020_2021.TeachersSignUp;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
@@ -34,11 +40,14 @@ import com.google.firebase.storage.UploadTask;
 import java.util.Calendar;
 
 public class TeacherSignUp4 extends AppCompatActivity {
-
+    Uri pdfUri;//URI ARE ACTUALLY URLS THAT ARE MEANT FOR LOCAL STORAGE
+   // ProgressDialog progressDialog;
+    FirebaseStorage storage;//used for uploading files
+    FirebaseDatabase database;//used to store the url of uploaded files.
     RadioGroup teaGender;
     RadioButton selectedGender;
     DatePicker teadatePicker;
-    Button toopt;
+    Button selectfile,toopt;
     ImageView backbtn;
     private FirebaseAuth mAuth;
     TextView tloginbtn;
@@ -52,7 +61,25 @@ public class TeacherSignUp4 extends AppCompatActivity {
 
         teaGender = (RadioGroup) findViewById(R.id.teagenderrg);
         teadatePicker = (DatePicker) findViewById(R.id.teaagepicker);
+        selectfile = (Button) findViewById(R.id.select_file);
+        storage=FirebaseStorage.getInstance();//RETURNS AN OBJECT OF CURRENT FIREBASE STORAGE
 
+        database=FirebaseDatabase.getInstance();//RETURNS AN OBJECT OF CURRENT FIREBASE database
+
+
+        selectfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(TeacherSignUp4.this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
+                {
+                    selectpdf();
+                }
+                else
+                {
+                    ActivityCompat.requestPermissions(TeacherSignUp4.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 9);
+                }
+            }
+        });
         toopt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -218,5 +245,64 @@ public class TeacherSignUp4 extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
 
+        if (requestCode==9&&grantResults[0]==PackageManager.PERMISSION_GRANTED)
+        {
+            selectpdf();
+        }else {
+            Toast.makeText(TeacherSignUp4.this, "please provide permission", Toast.LENGTH_LONG).show();
+        }
+    }
+    private void selectpdf() {
+        String[] mimeTypes =
+                {"application/msword","application/vnd.openxmlformats-officedocument.wordprocessingml.document", // .doc & .docx
+                        "application/vnd.ms-powerpoint","application/vnd.openxmlformats-officedocument.presentationml.presentation", // .ppt & .pptx
+                        "application/vnd.ms-excel","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", // .xls & .xlsx
+                        "text/plain",
+                        "application/pdf",
+                        "application/zip"};
+
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            intent.setType(mimeTypes.length == 1 ? mimeTypes[0] : "*/*");
+            if (mimeTypes.length > 0) {
+                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+            }
+        } else {
+            String mimeTypesStr = "";
+            for (String mimeType : mimeTypes) {
+                mimeTypesStr += mimeType + "|";
+            }
+            intent.setType(mimeTypesStr.substring(0,mimeTypesStr.length() - 1));
+        }
+        startActivityForResult(Intent.createChooser(intent,"ChooseFile"), 86);
+
+        //to offer user to select a file using file manager
+        //we will be using an intent
+
+       /* Intent intent=new Intent();
+        intent.setType("application/pdf");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//to fetch  files
+        startActivityForResult(intent,86);*/
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        //check weather user has selected a file of not
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 86 && resultCode == RESULT_OK && data != null) {
+            pdfUri = data.getData();//return the uri of selected file
+            //notification.setText("File is selected: "+data.getData().getLastPathSegment());
+            Toast.makeText(TeacherSignUp4.this, "file selected", Toast.LENGTH_LONG).show();
+
+        } else {
+            Toast.makeText(TeacherSignUp4.this, "please select the file", Toast.LENGTH_LONG).show();
+        }
+
+    }
 }
