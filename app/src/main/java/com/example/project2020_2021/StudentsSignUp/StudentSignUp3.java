@@ -1,5 +1,6 @@
 package com.example.project2020_2021.StudentsSignUp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
@@ -17,9 +18,19 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project2020_2021.Databases.StuUserHelperClass;
+import com.example.project2020_2021.Databases.TeaUserHelperClass;
 import com.example.project2020_2021.R;
 import com.example.project2020_2021.StudentsLogIn.StudentRegistration;
+import com.example.project2020_2021.StudentsProfile.StudentProfile;
+import com.example.project2020_2021.TeachersProfile.TeacherProfile;
+import com.example.project2020_2021.TeachersSignUp.TeacherSignUp4;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class StudentSignUp3 extends AppCompatActivity {
 
@@ -106,7 +117,7 @@ public class StudentSignUp3 extends AppCompatActivity {
                     return;
                 }
 
-                Intent intent = new Intent(StudentSignUp3.this, VerifyOPT3.class);
+//                Intent intent = new Intent(StudentSignUp3.this, VerifyOPT3.class);
 
                 selectedGender = (RadioButton) findViewById(stuGender.getCheckedRadioButtonId());
 
@@ -126,25 +137,65 @@ public class StudentSignUp3 extends AppCompatActivity {
                 String stussubS = stuss.getEditText().getText().toString().trim();
 
                 //passing data
-                intent.putExtra("stuname",_stuname);
-                intent.putExtra("stutype",_stutype);
-                intent.putExtra("stuemail",_stuemail);
-                intent.putExtra("stupass",_stupass);
-                intent.putExtra("stucountry",_stucountry);
-                intent.putExtra("stucity",_stucity);
-                intent.putExtra("stuaddress",_stuaddress);
-                intent.putExtra("stuphoneno",_stuphone);
-                intent.putExtra("stuteatype",stuteatypeS);
-                intent.putExtra("stussub",stussubS);
-                intent.putExtra("stugender",stugender);
-                intent.putExtra("studate",studate);
+//                intent.putExtra("stuname",_stuname);
+//                intent.putExtra("stutype",_stutype);
+//                intent.putExtra("stuemail",_stuemail);
+//                intent.putExtra("stupass",_stupass);
+//                intent.putExtra("stucountry",_stucountry);
+//                intent.putExtra("stucity",_stucity);
+//                intent.putExtra("stuaddress",_stuaddress);
+//                intent.putExtra("stuphoneno",_stuphone);
+//                intent.putExtra("stuteatype",stuteatypeS);
+//                intent.putExtra("stussub",stussubS);
+//                intent.putExtra("stugender",stugender);
+//                intent.putExtra("studate",studate);
 
 
                 Pair[] pairs = new Pair[1];
                 pairs[0] = new Pair<View,String>(teanext3,"transition_register_btn");
 
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(StudentSignUp3.this,pairs);
-                startActivity(intent,options.toBundle());
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(_stuemail, _stupass)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                if (task.isSuccessful()) {
+                                    StuUserHelperClass addNewUser = new StuUserHelperClass(_stuname, _stutype, _stuemail, _stupass, _stucountry, _stucity,
+                                            _stuaddress, _stuphone, stuteatypeS, stussubS, stugender, studate);
+                                    FirebaseDatabase.getInstance().getReference("Users").child("Students")
+                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            .setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if (task.isSuccessful()) {
+                                                Intent intent = new Intent(StudentSignUp3.this, StudentProfile.class);
+                                                startActivity(intent);
+
+//                                                mAuth.getCurrentUser().sendEmailVerification()
+//                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                            @Override
+//                                                            public void onComplete(@NonNull Task<Void> task) {
+//                                                                if (task.isSuccessful()) {
+//                                                                    Toast.makeText(TeacherSignUp4.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
+//                                                                } else {
+//                                                                    Toast.makeText(TeacherSignUp4.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
+//                                                                }
+//                                                            }
+//                                                        });
+                                            } else {
+                                                Toast.makeText(StudentSignUp3.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(StudentSignUp3.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        });
+//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(StudentSignUp3.this,pairs);
+//                startActivity(intent,options.toBundle());
             }
         });
 
