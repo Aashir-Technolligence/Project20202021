@@ -136,15 +136,15 @@ public class HomeRegistration extends AppCompatActivity {
 
                                 if(task.isSuccessful())
                                 {
-                                    if (mAuth.getCurrentUser().isEmailVerified())
-                                    {
+//                                    if (mAuth.getCurrentUser().isEmailVerified())
+//                                    {
                                         startActivity(new Intent(HomeRegistration.this, HomePage.class));
 
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(HomeRegistration.this, "Please Verify your Email Address!", Toast.LENGTH_LONG).show();
-                                    }
+//                                    }
+//                                    else
+//                                    {
+//                                        Toast.makeText(HomeRegistration.this, "Please Verify your Email Address!", Toast.LENGTH_LONG).show();
+//                                    }
                                 }
                                 else
                                 {

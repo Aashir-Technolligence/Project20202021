@@ -180,7 +180,7 @@ public class TeacherSignUp4 extends AppCompatActivity {
 //                                                            }
 //                                                        });
                                             } else {
-                                                Toast.makeText(TeacherSignUp4.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
+                                                //Toast.makeText(TeacherSignUp4.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     });

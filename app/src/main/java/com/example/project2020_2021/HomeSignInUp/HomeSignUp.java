@@ -15,10 +15,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project2020_2021.Databases.HomeUserHelperClass;
+import com.example.project2020_2021.Databases.StuUserHelperClass;
 import com.example.project2020_2021.Databases.UserHelperClass;
 import com.example.project2020_2021.InstitutesSignUp.VerifyOPT;
 import com.example.project2020_2021.MainHomeActivity.HomePage;
 import com.example.project2020_2021.R;
+import com.example.project2020_2021.StudentsProfile.StudentProfile;
+import com.example.project2020_2021.StudentsSignUp.StudentSignUp3;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -159,14 +162,12 @@ public class HomeSignUp extends AppCompatActivity {
 
         String email= "ch.imtinan@gmail.com";
         String pass ="ddd123";
-
-        mAuth.createUserWithEmailAndPassword(email,pass)
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(huseremail, huserpassword)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(task.isSuccessful())
-                        {
+                        if (task.isSuccessful()) {
                             HomeUserHelperClass addNewUser = new HomeUserHelperClass(husername, huseremail, huserpassword);
                             FirebaseDatabase.getInstance().getReference("Users").child("HomeUsers")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -174,38 +175,78 @@ public class HomeSignUp extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
 
-                                    if (task.isSuccessful())
-                                    {
-                                        mAuth.getCurrentUser().sendEmailVerification()
-                                                .addOnCompleteListener(new OnCompleteListener<Void>()
-                                                {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                        if (task.isSuccessful())
-                                                        {
-                                                            Toast.makeText(HomeSignUp.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
-                                                        }
-                                                        else
-                                                        {
-                                                            Toast.makeText(HomeSignUp.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
-                                                        }
-                                                    }
-                                                });
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(HomeSignUp.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+                                    if (task.isSuccessful()) {
+                                        Intent intent = new Intent(HomeSignUp.this, HomePage.class);
+                                        startActivity(intent);
+
+//                                                mAuth.getCurrentUser().sendEmailVerification()
+//                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                            @Override
+//                                                            public void onComplete(@NonNull Task<Void> task) {
+//                                                                if (task.isSuccessful()) {
+//                                                                    Toast.makeText(TeacherSignUp4.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
+//                                                                } else {
+//                                                                    Toast.makeText(TeacherSignUp4.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
+//                                                                }
+//                                                            }
+//                                                        });
+                                    } else {
+                                        Toast.makeText(HomeSignUp.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
                                     }
                                 }
                             });
-                        }
-                        else
-                        {
-                            Toast.makeText(HomeSignUp.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(HomeSignUp.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
                         }
 
                     }
                 });
+//        mAuth.createUserWithEmailAndPassword(email,pass)
+//                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//
+//                        if(task.isSuccessful())
+//                        {
+//                            HomeUserHelperClass addNewUser = new HomeUserHelperClass(husername, huseremail, huserpassword);
+//                            FirebaseDatabase.getInstance().getReference("Users").child("HomeUsers")
+//                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                                    .setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//
+//                                    if (task.isSuccessful())
+//                                    {
+//                                        mAuth.getCurrentUser().sendEmailVerification()
+//                                                .addOnCompleteListener(new OnCompleteListener<Void>()
+//                                                {
+//                                                    @Override
+//                                                    public void onComplete(@NonNull Task<Void> task) {
+//                                                        if (task.isSuccessful())
+//                                                        {
+//                                                            Toast.makeText(HomeSignUp.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
+//                                                        }
+//                                                        else
+//                                                        {
+//                                                            Toast.makeText(HomeSignUp.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                                                        }
+//                                                    }
+//                                                });
+//                                    }
+//                                    else
+//                                    {
+//                                        Toast.makeText(HomeSignUp.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                                    }
+//                                }
+//                            });
+//                        }
+//                        else
+//                        {
+//                            Toast.makeText(HomeSignUp.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+//                        }
+//
+//                    }
+//                });
 
     }
 

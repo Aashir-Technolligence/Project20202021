@@ -173,7 +173,7 @@ public class InstituteSignUp2 extends AppCompatActivity {
                                         }
                                     });
                                 } else {
-                                    Toast.makeText(InstituteSignUp2.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(InstituteSignUp2.this, "Registration Unsuccessful!", Toast.LENGTH_LONG).show();
                                 }
 
                             }

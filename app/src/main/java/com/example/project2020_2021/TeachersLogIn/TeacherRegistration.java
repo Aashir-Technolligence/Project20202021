@@ -143,8 +143,8 @@ public class TeacherRegistration extends AppCompatActivity {
 
                                 if(task.isSuccessful())
                                 {
-                                    if (mAuth.getCurrentUser().isEmailVerified())
-                                    {
+//                                    if (mAuth.getCurrentUser().isEmailVerified())
+//                                    {
                                         String uid = mAuth.getCurrentUser().getUid();
                                         databaseReference.child("Teachers").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                                             @Override
@@ -167,11 +167,11 @@ public class TeacherRegistration extends AppCompatActivity {
                                         });
 
 
-                                    }
-                                    else
-                                    {
-                                        Toast.makeText(TeacherRegistration.this, "Please Verify your Email Address!", Toast.LENGTH_LONG).show();
-                                    }
+//                                    }
+//                                    else
+//                                    {
+//                                        Toast.makeText(TeacherRegistration.this, "Please Verify your Email Address!", Toast.LENGTH_LONG).show();
+//                                    }
                                 }
                                 else
                                 {

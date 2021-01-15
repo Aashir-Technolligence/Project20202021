@@ -184,12 +184,12 @@ public class StudentSignUp3 extends AppCompatActivity {
 //                                                            }
 //                                                        });
                                             } else {
-                                                Toast.makeText(StudentSignUp3.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
+                                                //Toast.makeText(StudentSignUp3.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     });
                                 } else {
-                                    Toast.makeText(StudentSignUp3.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(StudentSignUp3.this, "Registration Unsuccessful!", Toast.LENGTH_LONG).show();
                                 }
 
                             }
