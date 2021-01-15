@@ -1,5 +1,6 @@
 package com.example.project2020_2021.StudentsSignUp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityOptions;
@@ -17,9 +18,17 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project2020_2021.Databases.StuUserHelperClass;
 import com.example.project2020_2021.R;
 import com.example.project2020_2021.StudentsLogIn.StudentRegistration;
+import com.example.project2020_2021.StudentsProfile.StudentProfile;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class StudentSignUp3 extends AppCompatActivity {
 
@@ -31,8 +40,13 @@ public class StudentSignUp3 extends AppCompatActivity {
     RadioGroup stuGender;
     RadioButton selectedGender;
     DatePicker studatePicker;
+    String stuname, stutype, stuemail, stupass, stucountry, stucity,
+            stuaddress, stuphone, stuteachertype, stussub, stugender, studate, stuteatypeS,stussubS;
 
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
 
+    final DatabaseReference reference = database.getReference("Users");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +67,15 @@ public class StudentSignUp3 extends AppCompatActivity {
         teanext3 = (Button) findViewById(R.id.register_student_next_btn);
 
 
-
+        Intent intent = getIntent();
+        stuname = getIntent().getStringExtra("stuname");
+        stutype = getIntent().getStringExtra("stutype");
+        stuemail = getIntent().getStringExtra("stuemail");
+        stupass = getIntent().getStringExtra("stupass");
+       stucountry = getIntent().getStringExtra("stucountry");
+        stucity = getIntent().getStringExtra("stucity");
+        stuaddress = getIntent().getStringExtra("stuaddress");
+        stuphone = getIntent().getStringExtra("stuphoneno");
         tloginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +109,7 @@ public class StudentSignUp3 extends AppCompatActivity {
                 if ( !validateStuTeaType() | !validateStuSS() | !validateStuGender()){
                     return;
                 }
-
+                storeNewUsersData();
                 Intent intent = new Intent(StudentSignUp3.this, VerifyOPT3.class);
 
                 selectedGender = (RadioButton) findViewById(stuGender.getCheckedRadioButtonId());
@@ -95,39 +117,39 @@ public class StudentSignUp3 extends AppCompatActivity {
 
 
                 //getting all values passed from previous screen
-                String _stuname = getIntent().getStringExtra("stuname");
-                String _stutype = getIntent().getStringExtra("stutype");
-                String _stuemail = getIntent().getStringExtra("stuemail");
-                String _stupass = getIntent().getStringExtra("stupass");
-                String _stucountry = getIntent().getStringExtra("stucountry");
-                String _stucity = getIntent().getStringExtra("stucity");
-                String _stuaddress = getIntent().getStringExtra("stuaddress");
-                String _stuphone = getIntent().getStringExtra("stuphoneno");
+//                String _stuname = getIntent().getStringExtra("stuname");
+//                String _stutype = getIntent().getStringExtra("stutype");
+//                String _stuemail = getIntent().getStringExtra("stuemail");
+//                String _stupass = getIntent().getStringExtra("stupass");
+//                String _stucountry = getIntent().getStringExtra("stucountry");
+//                String _stucity = getIntent().getStringExtra("stucity");
+//                String _stuaddress = getIntent().getStringExtra("stuaddress");
+//                String _stuphone = getIntent().getStringExtra("stuphoneno");
 
                 int day = studatePicker.getDayOfMonth();
                 int month = studatePicker.getMonth();
                 int year = studatePicker.getYear();
 
                 //getting fields data
-                String stugender = selectedGender.getText().toString();
-                String studate = day+"/"+month+"/"+year;
+                 stugender = selectedGender.getText().toString();
+                 studate = day+"/"+month+"/"+year;
 
-                String stuteatypeS = stutt.getEditText().getText().toString().trim();
-                String stussubS = stuss.getEditText().getText().toString().trim();
+                 stuteatypeS = stutt.getEditText().getText().toString().trim();
+                 stussubS = stuss.getEditText().getText().toString().trim();
 
                 //passing data
-                intent.putExtra("stuname",_stuname);
-                intent.putExtra("stutype",_stutype);
-                intent.putExtra("stuemail",_stuemail);
-                intent.putExtra("stupass",_stupass);
-                intent.putExtra("stucountry",_stucountry);
-                intent.putExtra("stucity",_stucity);
-                intent.putExtra("stuaddress",_stuaddress);
-                intent.putExtra("stuphoneno",_stuphone);
-                intent.putExtra("stuteatype",stuteatypeS);
-                intent.putExtra("stussub",stussubS);
-                intent.putExtra("stugender",stugender);
-                intent.putExtra("studate",studate);
+//                intent.putExtra("stuname",_stuname);
+//                intent.putExtra("stutype",_stutype);
+//                intent.putExtra("stuemail",_stuemail);
+//                intent.putExtra("stupass",_stupass);
+//                intent.putExtra("stucountry",_stucountry);
+//                intent.putExtra("stucity",_stucity);
+//                intent.putExtra("stuaddress",_stuaddress);
+//                intent.putExtra("stuphoneno",_stuphone);
+//                intent.putExtra("stuteatype",stuteatypeS);
+//                intent.putExtra("stussub",stussubS);
+//                intent.putExtra("stugender",stugender);
+//                intent.putExtra("studate",studate);
 
 
                 Pair[] pairs = new Pair[1];
@@ -189,5 +211,67 @@ public class StudentSignUp3 extends AppCompatActivity {
         }
     }
 
+    private void storeNewUsersData() {
 
+        /*FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+        DatabaseReference reference = rootNode.getReference("Institutes");
+
+        UserHelperClass addNewUser = new UserHelperClass(insname, instype, insemail, inspass, inscountry, city, address, phoneno);
+
+        reference.child(insname).setValue(addNewUser);*/
+
+        // progressbar.setVisibility(View.VISIBLE);
+      //  String email= "yusraabdulrasheed955@gmail.com";
+     //   String pass ="ccc123";
+
+        mAuth.createUserWithEmailAndPassword(stuemail,stupass)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if(task.isSuccessful())
+                        {
+                            StuUserHelperClass addNewUser = new StuUserHelperClass(stuname, stutype, stuemail, stupass, stucountry, stucity,
+                                    stuaddress, stuphone, stuteachertype, stussub, stugender, studate);
+                            FirebaseDatabase.getInstance().getReference("Users").child("Students")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    if (task.isSuccessful())
+                                    {
+                                        mAuth.getCurrentUser().sendEmailVerification()
+                                                .addOnCompleteListener(new OnCompleteListener<Void>()
+                                                {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if (task.isSuccessful())
+                                                        {
+                                                            Intent intent = new Intent(getApplicationContext(), StudentProfile.class);
+                                                            startActivity(intent);
+                                                            Toast.makeText(StudentSignUp3.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
+                                                        }
+                                                        else
+                                                        {
+                                                            Toast.makeText(StudentSignUp3.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+                                                        }
+                                                    }
+                                                });
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(StudentSignUp3.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
+                        }
+                        else
+                        {
+                            Toast.makeText(StudentSignUp3.this,"Registration UnSuccessful!",Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+                });
+    }
 }
