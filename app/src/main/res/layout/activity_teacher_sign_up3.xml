@@ -67,44 +67,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp">
 
-
-                <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="210dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/notification"
-                android:hint="Select current Degree pdf"
-                android:gravity="center"
-                android:textColor="@color/black"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_gravity="center">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:inputType="none"
-                        android:enabled="false"
-                        android:textColor="@color/black"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-                <Button
-                    android:id="@+id/select_file"
-                    android:layout_width="130dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="wrap_content"
-                    android:text="Upload Transcript"
-                    android:background="@drawable/fillbtnbg"
-                    android:textColor="@color/lwhite"
-                    android:textAllCaps="false"
-                    android:layout_gravity="center"/>
-
-            </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
