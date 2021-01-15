@@ -30,7 +30,7 @@ public class TeacherSignUp3 extends AppCompatActivity {
     //Variables
     LinearLayout rlogin;
     ImageView backbtn;
-    Button nextbtn;
+    Button selectfile, nextbtn;
     TextView  tloginbtn,ttext, subtext;
     Uri pdfUri;   //Url for local storage
     AutoCompleteTextView autoCompleteTextView,autoCompleteTextView2 ;
@@ -43,21 +43,21 @@ public class TeacherSignUp3 extends AppCompatActivity {
 
 
         notification=(TextInputLayout) findViewById(R.id.notification);
-//        selectfile = (Button) findViewById(R.id.select_file);
-//
-//        selectfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (ContextCompat.checkSelfPermission(TeacherSignUp3.this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
-//                {
-//                    selectPdf();
-//                }
-//                else
-//                {
-//                    ActivityCompat.requestPermissions(TeacherSignUp3.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 9);
-//                }
-//            }
-//        });
+        selectfile = (Button) findViewById(R.id.select_file);
+
+        selectfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ContextCompat.checkSelfPermission(TeacherSignUp3.this, Manifest.permission.READ_EXTERNAL_STORAGE)== PackageManager.PERMISSION_GRANTED)
+                {
+                    selectPdf();
+                }
+                else
+                {
+                    ActivityCompat.requestPermissions(TeacherSignUp3.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 9);
+                }
+            }
+        });
 
         //for dropdown fields
         autoCompleteTextView = findViewById(R.id.autocompletetextclass);
@@ -168,38 +168,38 @@ public class TeacherSignUp3 extends AppCompatActivity {
 
     }
 
-//    @Override
-//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        if (requestCode==9 && grantResults[0] ==PackageManager.PERMISSION_GRANTED)
-//        {
-//            selectPdf();
-//        }
-//        else
-//        {
-//            Toast.makeText(TeacherSignUp3.this,"Please Provide Permission...",Toast.LENGTH_SHORT).show();
-//        }
-//    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode==9 && grantResults[0] ==PackageManager.PERMISSION_GRANTED)
+        {
+            selectPdf();
+        }
+        else
+        {
+            Toast.makeText(TeacherSignUp3.this,"Please Provide Permission...",Toast.LENGTH_SHORT).show();
+        }
+    }
 
-//    private  void selectPdf(){
-//
-//        Intent intent = new Intent();
-//        intent.setType("application/pdf");
-//        intent.setAction(Intent.ACTION_GET_CONTENT); //to fetch files
-//        startActivityForResult(intent,86);
-//
-//    }
+    private  void selectPdf(){
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 86 && resultCode == RESULT_OK && data != null) {
-//            pdfUri = data.getData();
-//            notification.getEditText().setText("A file is selected: " + data.getData().getLastPathSegment());
-//        } else {
-//            Toast.makeText(TeacherSignUp3.this, "Please Select a File", Toast.LENGTH_SHORT).show();
-//        }
-//    }
+        Intent intent = new Intent();
+        intent.setType("application/pdf");
+        intent.setAction(Intent.ACTION_GET_CONTENT); //to fetch files
+        startActivityForResult(intent,86);
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 86 && resultCode == RESULT_OK && data != null) {
+            pdfUri = data.getData();
+            notification.getEditText().setText("A file is selected: " + data.getData().getLastPathSegment());
+        } else {
+            Toast.makeText(TeacherSignUp3.this, "Please Select a File", Toast.LENGTH_SHORT).show();
+        }
+    }
 
     //Validation Function
 
