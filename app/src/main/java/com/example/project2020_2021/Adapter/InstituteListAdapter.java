@@ -34,10 +34,10 @@ public class InstituteListAdapter extends RecyclerView.Adapter<InstituteListAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         holder.name.setText(instituteAttrs.get(position).getInsname());
-        holder.city.setText(instituteAttrs.get(position).getCity());
-        holder.phone.setText(instituteAttrs.get(position).getPhoneno());
-        holder.address.setText(instituteAttrs.get(position).getAddress());
-        holder.country.setText(instituteAttrs.get(position).getInscountry());
+        holder.type.setText(instituteAttrs.get(position).getInstype());
+//        holder.phone.setText(instituteAttrs.get(position).getPhoneno());
+//        holder.address.setText(instituteAttrs.get(position).getAddress());
+//        holder.country.setText(instituteAttrs.get(position).getInscountry());
 
 
     }
@@ -48,15 +48,15 @@ public class InstituteListAdapter extends RecyclerView.Adapter<InstituteListAdap
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView name, phone, city,address,country;
+        TextView name, type, city,address,country;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.txtInsName);
-            city = (TextView) itemView.findViewById(R.id.txtInsCity);
-            phone = (TextView) itemView.findViewById(R.id.txtInsPhone);
-            address = (TextView) itemView.findViewById(R.id.txtInsAddress);
-            country = (TextView) itemView.findViewById(R.id.txtInsCountry);
+            type = (TextView) itemView.findViewById(R.id.txtInsType);
+//            phone = (TextView) itemView.findViewById(R.id.txtInsPhone);
+//            address = (TextView) itemView.findViewById(R.id.txtInsAddress);
+//            country = (TextView) itemView.findViewById(R.id.txtInsCountry);
 
         }
     }

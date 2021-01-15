@@ -1,5 +1,6 @@
 package com.example.project2020_2021.InstitutesSignUp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,10 +17,21 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.project2020_2021.Databases.TeaUserHelperClass;
+import com.example.project2020_2021.Databases.UserHelperClass;
 import com.example.project2020_2021.InstitutesLogIn.InstituteRegistration;
+import com.example.project2020_2021.InstitutesProfile.InstituteProfile;
 import com.example.project2020_2021.R;
+import com.example.project2020_2021.TeachersProfile.TeacherProfile;
+import com.example.project2020_2021.TeachersSignUp.TeacherSignUp4;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.hbb20.CountryCodePicker;
 
 public class InstituteSignUp2 extends AppCompatActivity {
@@ -92,7 +104,7 @@ public class InstituteSignUp2 extends AppCompatActivity {
                     return;
                 }
 
-                Intent intent = new Intent(InstituteSignUp2.this, VerifyOPT.class);
+//                Intent intent = new Intent(InstituteSignUp2.this, VerifyOPT.class);
 
                 //getting all values passed from previous screen
                 String _insname = getIntent().getStringExtra("insname");
@@ -113,22 +125,62 @@ public class InstituteSignUp2 extends AppCompatActivity {
                 }
 
                 String insphonefullS = "+" + insphonecode.getFullNumber() + insphoneS;
-
+                String phoneno = insphonefullS;
                 //passing data
-                intent.putExtra("insname",_insname);
-                intent.putExtra("instype",_instype);
-                intent.putExtra("insemail",_insemail);
-                intent.putExtra("inspass",_inspass);
-                intent.putExtra("inscountry",inscountryS);
-                intent.putExtra("city",inscityS);
-                intent.putExtra("address",insaddressS);
-                intent.putExtra("phoneno",insphonefullS);
+//                intent.putExtra("insname",_insname);
+//                intent.putExtra("instype",_instype);
+//                intent.putExtra("insemail",_insemail);
+//                intent.putExtra("inspass",_inspass);
+//                intent.putExtra("inscountry",inscountryS);
+//                intent.putExtra("city",inscityS);
+//                intent.putExtra("address",insaddressS);
+//                intent.putExtra("phoneno",insphonefullS);
 
                 Pair[] pairs = new Pair[1];
                 pairs[0] = new Pair<View,String>(toopt,"transition_register_btn");
 
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(InstituteSignUp2.this,pairs);
-                startActivity(intent);
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(_insemail, _inspass)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                if (task.isSuccessful()) {
+                                    UserHelperClass addNewUser = new UserHelperClass(_insname, _instype, _insemail, _inspass, inscountryS, inscityS, insaddressS, phoneno);
+                                    FirebaseDatabase.getInstance().getReference("Users").child("Institutes")
+                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("InstituteDetails")
+                                            .setValue(addNewUser).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if (task.isSuccessful()) {
+                                                Intent intent = new Intent(InstituteSignUp2.this, InstituteProfile.class);
+                                                startActivity(intent);
+
+//                                                mAuth.getCurrentUser().sendEmailVerification()
+//                                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                                            @Override
+//                                                            public void onComplete(@NonNull Task<Void> task) {
+//                                                                if (task.isSuccessful()) {
+//                                                                    Toast.makeText(TeacherSignUp4.this, "Registration Successful! Check your Email for further Verification", Toast.LENGTH_LONG).show();
+//                                                                } else {
+//                                                                    Toast.makeText(TeacherSignUp4.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
+//                                                                }
+//                                                            }
+//                                                        });
+                                            } else {
+                                                Toast.makeText(InstituteSignUp2.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
+                                } else {
+                                    Toast.makeText(InstituteSignUp2.this, "Registration UnSuccessful!", Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+                        });
+
+//                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(InstituteSignUp2.this,pairs);
+//                startActivity(intent);
             }
 
             //Checking Wifi Connection
